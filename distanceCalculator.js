@@ -1,8 +1,10 @@
-function calculateDistance(lat1, lon1, lat2, lon2) { 	//calculates the distance as the crow flies
-	var R = 3958.76; 		//calculation from movable-type.co.uk (no longer the EU)
-
-	//setting 
-	var latRads1 = toRadians(lat1);
+//Calculates distance as the crow flies
+function calculateDistance(lat1, lon1, lat2, lon2){
+  //calculation from http://www.movable-type.co.uk/scripts/latlong.html
+  var R = 3958.76; // miles
+  
+  //Setting
+  var latRads1 = toRadians(lat1);
   var latRads2 = toRadians(lat2);
   var latDeltaRads = toRadians(lat2-lat1);
   var lonDeltaRads = toRadians(lon2-lon1);
@@ -15,5 +17,7 @@ function calculateDistance(lat1, lon1, lat2, lon2) { 	//calculates the distance 
 }
 
 function toRadians(value) {
-	return value * Math.PI / 180
+  return value * Math.PI / 180;
 }
+
+

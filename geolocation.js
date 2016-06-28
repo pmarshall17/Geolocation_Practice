@@ -1,9 +1,15 @@
 $("#error").hide();
-$("#error").show();
+$("#hud").show();
+
+if(navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(gotLocation);
+} else {
+	displayError("Your browser doesnt support geolocation");
+}
 
 navigator.gelocation.getCurrentPosition(gotLocation);
 
-function gotLocation(currentPostion)
+function gotLocation(currentPostion){
 	$("#hud").hide();
 
 	var $restaurants = $("span");
@@ -18,6 +24,28 @@ function gotLocation(currentPostion)
   });
 }
 
+function gotError(error) {
+	var message;
+
+	switch(error.code) {
+		case error.PERMISSION_DENIED:
+			message = "You need to give permission to your location to calculate distances";
+			break;
+		case error.POSITION_UNAVAILABLE:
+			message = "There was an issue getting yoru location form your device. PLease try again";
+			break;
+		case error.TIMEOUT:
+			message = "It took too long getting your position.";
+			break;
+		default:
+		message = "An unknown error has occured, please refresh the page";
+			break;
+	}
+	displayError(message);
+}
+
+
 function displayError(message) {
+	$("#hud").hide();
   $("#error").text(message).slideDown("slow");
 }
